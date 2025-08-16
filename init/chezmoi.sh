@@ -17,7 +17,7 @@ fi
 
 [ -e "${HOME}/.local/share/chezmoi/data" ] && exit 0
 
-set -eux
+set -e
 
 check() { "$@" &>/dev/null && echo 1 || echo 0; }
 bool() { [ "${!1}" -eq 1 ] 2>/dev/null; }
@@ -25,11 +25,10 @@ bool() { [ "${!1}" -eq 1 ] 2>/dev/null; }
 if_exists() { check [ -e "$1" ]; }
 if_cmd() { check /bin/sh -c "command -v $1"; }
 if_set() {
-  echo "if_set args: $*"
   if [ $# -eq 2 ]; then
     check [ "$1" = "$2" ]
   else
-    check [ -n "${!1}" ]
+    check [ -n "$1" ]
   fi
 }
 
