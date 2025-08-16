@@ -20,7 +20,7 @@ $EXEC -c "curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/fu
 
 # Install starship
 if ! command -v starship; then
-  sh -c "$(curl -sS https://starship.rs/install.sh)" -y
+  sh -c "$(curl -sS https://starship.rs/install.sh)" -- --force --bin-dir /usr/local/bin
 fi
 
 # Install node.js
