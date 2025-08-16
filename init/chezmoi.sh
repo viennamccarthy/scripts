@@ -28,7 +28,7 @@ if_set() {
   if [ $# -eq 2 ]; then
     check [ "$1" = "$2" ]
   else
-    check [ -n "$1" ]
+    check [ -n "${!1}" ]
   fi
 }
 
