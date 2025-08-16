@@ -76,7 +76,7 @@ is_dev=$(if_any "$(if_set $CONTAINER_ID "devbox")" "$(if_set $DEV)")
 git clone "git@github.com:viennamccarthy/dotfiles" "${HOME}/.local/share/chezmoi"
 
 # Check data dir
-declare DATA_DIR="${HOME}/.local/share/chezmoi/data"
+declare DATA_DIR="${HOME}/.local/share/chezmoi/.data"
 mkdir -p "$DATA_DIR"
 cd "$DATA_DIR" || { echo "Could not find chezmoi data dir" && exit 1; }
 
