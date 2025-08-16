@@ -26,9 +26,9 @@ if_exists() { check [ -e "$1" ]; }
 if_cmd() { check /bin/sh -c "command -v $1"; }
 if_set() {
   if [ $# -eq 2 ]; then
-    check [ "${!1}" = "$2" ]
+    check [ "$1" = "$2" ]
   else
-    check [ -n "${!1}" ]
+    check [ -n "$1" ]
   fi
 }
 
@@ -65,12 +65,12 @@ is_linux=$(if_any is_fedora is_debian)
 is_mac=$(if_not is_linux)
 is_gnome=$(if_cmd "gnome-shell")
 is_kde=$(if_cmd "plasmashell")
-is_container=$(if_any "$(if_set CONTAINER_ID)" "$(if_exists "/.dockerenv")")
+is_container=$(if_any "$(if_set $CONTAINER_ID)" "$(if_exists "/.dockerenv")")
 is_headless=$(if_not is_mac is_gnome is_kde is_container)
 is_laptop=$(if_keyboard)
 is_desktop=$(if_not is_headless is_container is_laptop)
 is_gaming=$(if_all is_linux "$(if_cmd "steam")")
-is_dev=$(if_any "$(if_set CONTAINER_ID "devbox")" "$(if_set DEV)")
+is_dev=$(if_any "$(if_set $CONTAINER_ID "devbox")" "$(if_set $DEV)")
 
 # Clone into chezmoi directory
 git clone "git@github.com:viennamccarthy/dotfiles" "${HOME}/.local/share/chezmoi"
