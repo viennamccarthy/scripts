@@ -15,7 +15,7 @@ elif ! git ls-remote $REPO &>/dev/null; then
   exit 1
 fi
 
-[ -e "${HOME}/.local/share/chezmoi/data" ] && exit 0
+[ -e "${HOME}/.local/share/chezmoi/.data" ] && exit 0
 
 set -e
 
