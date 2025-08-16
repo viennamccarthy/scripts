@@ -13,10 +13,17 @@ fi
 
 [ -e "${HOME}/.config/fish/functions/fisher.fish" ] && exit 0
 
-set -eux
+set -e
 
+# Install fisher
 $EXEC -c "curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher"
 
+# Install starship
+if ! command -v starship; then
+  curl -sS https://starship.rs/install.sh | sh
+fi
+
+# Install node.js
 if [ -n "$DEV" ]; then
   $EXEC -c "fisher install jorgebucaran/nvm.fish"
   $EXEC -c "fisher install rstacruz/fish-npm-global"

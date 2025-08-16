@@ -18,6 +18,7 @@ fi
 
 [ -e "${HOME}/.local/share/nvim/lazy" ] && exit 0
 
-set -eux
+set -e
 
+# Install lazy and plugigns
 $EXEC --headless "+Lazy! sync" +qa
