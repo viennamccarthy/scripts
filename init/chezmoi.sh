@@ -25,6 +25,7 @@ bool() { [ "${!1}" -eq 1 ] 2>/dev/null; }
 if_exists() { check [ -e "$1" ]; }
 if_cmd() { check /bin/sh -c "command -v $1"; }
 if_set() {
+  echo "if_set args: $*"
   if [ $# -eq 2 ]; then
     check [ "$1" = "$2" ]
   else
