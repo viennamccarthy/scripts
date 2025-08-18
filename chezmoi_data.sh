@@ -65,7 +65,7 @@ is_headless=$(if_not is_mac is_gnome is_kde is_container)
 is_laptop=$(if_keyboard)
 is_desktop=$(if_not is_headless is_container is_laptop)
 is_gaming=$(if_all is_linux "$(if_cmd "steam")")
-is_dev=$(if_any "$(if_set $CONTAINER_ID "devbox")" "$(if_set $DEV)")
+is_dev=$(if_any "$(if_set $CONTAINER_ID "devbox")" "$(if_set $DEVPOD)" "$(if_set $DEV)")
 
 # Go to data dir
 mkdir -p "$DATA_DIR" && cd "$DATA_DIR"
