@@ -1,14 +1,12 @@
 #!/bin/bash
 
 declare CHEZMOI_DIR="${HOME}/.local/share/chezmoi"
-declare DATA_DIR="${CHEZMOI_DIR}/.data"
-declare DATA=(is_fedora is_debian is_mac is_linux is_gnome is_kde is_headless is_laptop is_desktop is_gaming is_dev is_container)
 
 if [ "$(id -u)" -eq 0 ]; then
   echo -e "Script must not be run as root."
   exit 1
-elif ! [ -d "$DATA_DIR" ]; then
-  echo -e "Chezmoi directory not found at $DATA_DIR."
+elif ! [ -d "$CHEZMOI_DIR" ]; then
+  echo -e "Chezmoi directory not found at $CHEZMOI_DIR."
   exit 1
 fi
 
@@ -51,6 +49,9 @@ if_keyboard() {
   fi
   echo 0
 }
+
+declare DATA=(is_fedora is_debian is_mac is_linux is_gnome is_kde is_headless is_laptop is_desktop is_gaming is_dev is_container)
+declare DATA_DIR="${CHEZMOI_DIR}/.data"
 
 # Get data
 is_fedora=$(if_exists "/etc/fedora-release")
