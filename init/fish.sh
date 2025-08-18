@@ -24,8 +24,6 @@ if ! command -v starship; then
 fi
 
 # Install node.js
-if [ -n "$DEV" ]; then
-  $EXEC -c "fisher install jorgebucaran/nvm.fish"
-  $EXEC -c "fisher install rstacruz/fish-npm-global"
-  $EXEC -c "nvm install lts && nvm use lts"
-fi
+$EXEC -c "fisher install jorgebucaran/nvm.fish"
+$EXEC -c "fisher install rstacruz/fish-npm-global"
+$EXEC -c "nvm install lts && nvm use lts"
