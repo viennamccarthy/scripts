@@ -12,18 +12,32 @@ sudo apt-get install -y build-essential lua5.1 liblua5.1-0-dev libreadline-dev l
 
 # Install Neovim
 
-declare URL FILE EXTRACTED ORIGIN
+declare OS MACHINE URL FILE EXTRACTED ORIGIN
 
-URL="https://github.com/neovim/neovim/releases/latest/download/nvim-linux-$(uname -m).tar.gz"
+OS=$([ "$(uname)" = "Darwin" ] && echo "macos" || echo "linux")
+ORIGIN="$(pwd)"
+MACHINE="$(uname -m)"
 
+URL="https://github.com/neovim/neovim/releases/latest/download/nvim-$OS-$MACHINE.tar.gz"
 FILE="${URL##*/}"
 EXTRACTED="${FILE%%.tar.gz}"
-ORIGIN="$(pwd)"
 
 [ -d temp_install ] && rm -rf temp_install
 mkdir temp_install && cd temp_install
+
 curl -LO "$URL"
-tar -xzf "$FILE"
+if ! tar xzvf "$FILE"; then
+  if [ "$MACHINE" = "aarch64" ]; then
+    URL="https://github.com/neovim/neovim/releases/latest/download/nvim-$OS-arm64.tar.gz"
+    FILE="${URL##*/}"
+    EXTRACTED="${FILE%%.tar.gz}"
+    curl -LO "$URL"
+    if ! tar xzvf "$FILE"; then exit 1; fi
+  else
+    exit 1
+  fi
+fi
+
 [ -d "$EXTRACTED" ] && cd "$EXTRACTED"
 
 sudo mv "bin/nvim" /usr/bin/
