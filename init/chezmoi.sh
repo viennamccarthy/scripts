@@ -23,7 +23,7 @@ set -e
 git clone "git@github.com:viennamccarthy/dotfiles" "${HOME}/.local/share/chezmoi"
 
 # Save data
-bash -c "$(curl -fsSL https://sh.endelyn.com/chezmoi_data.sh)"
+bash -c "$(curl -fsSL https://sh.endelyn.com/init/chezmoi-data)"
 
 # Init chezmoi
 $EXEC init --apply
