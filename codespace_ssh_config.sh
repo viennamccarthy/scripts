@@ -28,3 +28,6 @@ if [ -f "$SSH_CONFIG" ] && ! grep -q "Include.*codespace_config" "$SSH_CONFIG"; 
 elif [ ! -f "$SSH_CONFIG" ]; then
   echo "Include $CODESPACE_CONFIG" >"$SSH_CONFIG"
 fi
+
+sudo chmod 600 "$SSH_CONFIG"
+sudo chmod 600 "$CODESPACE_CONFIG"
